@@ -10,7 +10,7 @@
     <title>Search page</title>
 </head>
 <body>
-<form action="#" method="post" th:action="@{/search}" th:object="${searchForm}" class="center">
+<form action="#" method="post" th:action="@{/results}" th:object="${searchForm}" class="center">
     <div>
         <input type="text" placeholder="Input searched title here" th:value="*{title}"/>
     </div>

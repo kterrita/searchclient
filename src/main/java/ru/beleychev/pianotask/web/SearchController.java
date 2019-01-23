@@ -30,18 +30,18 @@ public class SearchController {
     @GetMapping("/")
     public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("search");
+        modelAndView.setViewName("index");
         modelAndView.addObject("searchForm", new SearchForm());
         return modelAndView;
     }
 
-    @PostMapping("/search")
+    @PostMapping("/results")
     public ResponseEntity<ModelAndView> results(@Valid SearchForm searchForm, BindingResult bindingResult) {
         ModelAndView modelAndView;
         if (bindingResult.hasErrors()) {
-            modelAndView = new ModelAndView("search");
+            modelAndView = new ModelAndView("index");
             return new ResponseEntity<>(modelAndView, HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(new ModelAndView("search"), HttpStatus.OK);
+        return new ResponseEntity<>(new ModelAndView("index"), HttpStatus.OK);
     }
 }
