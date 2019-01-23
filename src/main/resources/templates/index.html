@@ -5,14 +5,30 @@
         .center {
             text-align: center;
         }
+        .block {
+            text-decoration: none;
+            display: inline-block;
+            padding: 8px 16px;
+        }
+        #previous-page {
+            float: left;
+        }
+        #next-page {
+            float: right;
+        }
     </style>
     <meta charset="UTF-8">
     <title>Search page</title>
 </head>
+
 <body>
+
 <form action="#" method="post" th:action="@{/results}" th:object="${searchForm}" class="center">
     <div>
-        <input type="text" placeholder="Input searched title here" th:value="*{title}"/>
+        <input type="text" placeholder="Input searched title here" th:field="*{title}" th:value="*{title}"/>
+    </div>
+    <div th:if="${error}">
+        <label th:text="${error}"></label>
     </div>
     <div>
         <input type="submit" value="Submit"/>

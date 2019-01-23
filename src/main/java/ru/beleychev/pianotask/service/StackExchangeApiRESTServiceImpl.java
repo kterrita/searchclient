@@ -21,12 +21,8 @@ public class StackExchangeApiRESTServiceImpl implements StackExchangeApiRESTServ
     }
 
     @Override
-    public List<Item> getItems(String title, Integer page) {
-        SearchResponse searchResponse = restClient.getQuestionsByTitle(title, page);
-        if (searchResponse == null) {
-            return new ArrayList<>(0);
-        }
-        return searchResponse.getItems();
+    public SearchResponse getResponse(String title, Integer page) {
+        return restClient.getQuestionsByTitle(title, page);
     }
 }
 

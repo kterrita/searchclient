@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        .block {
+            text-decoration: none;
+            display: inline-block;
+            padding: 8px 16px;
+        }
+
+        #previous-page {
+            float: left;
+        }
+
+        #next-page {
+            float: right;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Search page</title>
+</head>
+<body>
+
+
+<div>
+    <h2>List of Questions</h2>
+
+    <table th:border="1">
+        <thead>
+        <tr>
+            <th th:text="#{item.title}"></th>
+            <th th:text="#{item.link}"></th>
+            <th th:text="#{item.creation.date}"></th>
+            <th th:text="#{item.answered}"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${searchResponse.getItems()}">
+            <td th:text="${item.title}"></td>
+            <td><a th:href="${item.link}">Link</a></td>
+            <td th:text="${item.creationDate}"></td>
+            <td th:text="${item.answered} ? 'Yes' : 'No'"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="block" th:if="${searchResponse}">
+    <th:block th:if="${page > 1}">
+        <form id="previous-page" method="post" th:object="${searchResponse}" th:action="@{/results/{path}(path=${page} - 1)}" action="#">
+            <input hidden type="text" th:field="*{title}" th:value="${searchResponse.title}"/>
+            <input type="submit" value="Previous page"/>
+        </form>
+    </th:block>
+
+    <th:block th:if="${searchResponse.hasMore}">
+        <form id="next-page" method="post" th:object="${searchResponse}" th:action="@{/results/{path}(path=${page} + 1)}" action="#">
+            <input hidden type="text" th:field="*{title}" th:value="${searchResponse.title}"/>
+            <input type="submit" value="Next page"/>
+        </form>
+    </th:block>
+</div>
+
+<div>
+    <a href="/">Search new questions</a>
+</div>
+
+</body>
+</html>

@@ -1,8 +1,6 @@
 package ru.beleychev.pianotask.service;
 
-import ru.beleychev.pianotask.domain.Item;
-
-import java.util.List;
+import ru.beleychev.pianotask.domain.SearchResponse;
 
 /**
  * @author beleychev
@@ -10,11 +8,11 @@ import java.util.List;
 public interface StackExchangeApiRESTService {
 
     /**
-     * Returns list of items by title
+     * Returns search response by title
      *
      * @param title title to search
      * @param page  page to return
      * @return list of items by title
      */
-    List<Item> getItems(String title, Integer page);
+    SearchResponse getResponse(String title, Integer page);
 }

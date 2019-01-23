@@ -11,6 +11,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import ru.beleychev.pianotask.domain.SearchResponse;
 
 import java.net.URI;
+import java.util.Objects;
 
 /**
  * @author beleychev
@@ -44,7 +45,10 @@ public class RestClient {
         URI uri = initUri(title, page);
         LOGGER.debug("Get request to uri: {}", uri);
         ResponseEntity<SearchResponse> response = restTemplate.getForEntity(uri, SearchResponse.class);
-        return response.getBody();
+        SearchResponse searchResponse = response.getBody();
+        Objects.requireNonNull(searchResponse);
+        searchResponse.setTitle(title);
+        return searchResponse;
     }
 
     private URI initUri(String title, Integer page) {

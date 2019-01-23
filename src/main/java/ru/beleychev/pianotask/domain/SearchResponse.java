@@ -3,6 +3,7 @@ package ru.beleychev.pianotask.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -16,6 +17,12 @@ public class SearchResponse {
     @JsonProperty("items")
     private List<Item> items;
 
+    @JsonProperty("has_more")
+    private boolean hasMore;
+
+    @NotBlank
+    private String title;
+
     public SearchResponse() {
         //default constructor for jackson
     }
@@ -26,6 +33,22 @@ public class SearchResponse {
 
     public void setItems(List<Item> items) {
         this.items = items;
+    }
+
+    public boolean isHasMore() {
+        return hasMore;
+    }
+
+    public void setHasMore(boolean hasMore) {
+        this.hasMore = hasMore;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Override
@@ -47,6 +70,8 @@ public class SearchResponse {
     public String toString() {
         return "SearchResponse{" +
                 "items=" + items +
+                ", hasMore=" + hasMore +
+                ", title='" + title + '\'' +
                 '}';
     }
 }
