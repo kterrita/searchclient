@@ -3,19 +3,29 @@ package ru.beleychev.pianotask.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 /**
  * @author beleychev
  */
 @JsonIgnoreProperties
-public class Owner {
+public class SearchResponse {
 
-    @JsonProperty("display_name")
-    private String displayName;
+    @JsonProperty("items")
+    private List<Item> items;
 
-    public Owner() {
+    public SearchResponse() {
         //default constructor for jackson
+    }
+
+    public List<Item> getItems() {
+        return Collections.unmodifiableList(items);
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 
     @Override
@@ -24,19 +34,19 @@ public class Owner {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        Owner owner = (Owner) o;
-        return Objects.equals(displayName, owner.displayName);
+        SearchResponse that = (SearchResponse) o;
+        return Objects.equals(items, that.items);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(displayName);
+        return Objects.hash(items);
     }
 
     @Override
     public String toString() {
-        return "Owner{" +
-                "displayName='" + displayName + '\'' +
+        return "SearchResponse{" +
+                "items=" + items +
                 '}';
     }
 }
