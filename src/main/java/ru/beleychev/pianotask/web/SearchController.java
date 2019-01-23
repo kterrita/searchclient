@@ -2,13 +2,13 @@ package ru.beleychev.pianotask.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
 import ru.beleychev.pianotask.domain.SearchForm;
 import ru.beleychev.pianotask.service.StackExchangeApiRESTService;
 
@@ -36,12 +36,12 @@ public class SearchController {
     }
 
     @PostMapping("/search")
-    public ModelAndView results(@Valid @RequestBody SearchForm searchForm, BindingResult bindingResult) {
+    public ResponseEntity<ModelAndView> results(@Valid SearchForm searchForm, BindingResult bindingResult) {
         ModelAndView modelAndView;
         if (bindingResult.hasErrors()) {
             modelAndView = new ModelAndView("search");
-            return modelAndView;
+            return new ResponseEntity<>(modelAndView, HttpStatus.BAD_REQUEST);
         }
-        return new ModelAndView("results");
+        return new ResponseEntity<>(new ModelAndView("search"), HttpStatus.OK);
     }
 }
