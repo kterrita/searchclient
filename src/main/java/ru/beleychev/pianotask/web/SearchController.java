@@ -37,10 +37,11 @@ public class SearchController {
 
     @PostMapping("/results")
     public ModelAndView results(@Valid SearchForm searchForm, BindingResult bindingResult) {
-        ModelAndView modelAndView;
         if (bindingResult.hasErrors()) {
-            modelAndView = new ModelAndView("index");
-            modelAndView.addObject("error", bindingResult.getAllErrors().get(0).getDefaultMessage());
+            String defaultMessage = bindingResult.getAllErrors().get(0).getDefaultMessage();
+            LOGGER.warn("Error during getting results. Details: [{}]", defaultMessage);
+            ModelAndView modelAndView = new ModelAndView("index");
+            modelAndView.addObject("error", defaultMessage);
             return modelAndView;
         }
         SearchResponse searchResponse = new SearchResponse();

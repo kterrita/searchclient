@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -15,7 +16,7 @@ import java.util.Objects;
 public class SearchResponse {
 
     @JsonProperty("items")
-    private List<Item> items;
+    private List<Item> items = new ArrayList<>();
 
     @JsonProperty("has_more")
     private boolean hasMore;

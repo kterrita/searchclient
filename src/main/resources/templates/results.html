@@ -25,13 +25,14 @@
 <div>
     <h2>List of Questions</h2>
 
-    <table th:border="1">
+    <table th:border="1" th:if="${searchResponse}">
         <thead>
         <tr>
             <th th:text="#{item.title}"></th>
             <th th:text="#{item.link}"></th>
             <th th:text="#{item.creation.date}"></th>
             <th th:text="#{item.answered}"></th>
+            <th th:text="#{item.author}"></th>
         </tr>
         </thead>
         <tbody>
@@ -39,7 +40,8 @@
             <td th:text="${item.title}"></td>
             <td><a th:href="${item.link}">Link</a></td>
             <td th:text="${item.creationDate}"></td>
-            <td th:text="${item.answered} ? 'Yes' : 'No'"></td>
+            <td th:text="${item.answered} ? 'Yes' : 'No'" th:style="${item.answered} ? 'color: green;' : 'color: red;'"></td>
+            <td th:text="${item.owner.displayName}"></td>
         </tr>
         </tbody>
     </table>

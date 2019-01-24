@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -47,6 +48,10 @@ public class RestClient {
         ResponseEntity<SearchResponse> response = restTemplate.getForEntity(uri, SearchResponse.class);
         SearchResponse searchResponse = response.getBody();
         Objects.requireNonNull(searchResponse);
+        if (CollectionUtils.isEmpty(searchResponse.getItems())) {
+            LOGGER.warn("There are no questions with title {} returned", title);
+            return null;
+        }
         searchResponse.setTitle(title);
         return searchResponse;
     }

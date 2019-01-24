@@ -24,6 +24,9 @@ public class Item {
     @JsonProperty("is_answered")
     private boolean isAnswered;
 
+    @JsonProperty("owner")
+    private Owner owner;
+
     public Item() {
         //default constructor for jackson
     }
@@ -58,6 +61,14 @@ public class Item {
 
     public void setAnswered(boolean answered) {
         isAnswered = answered;
+    }
+
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
     }
 
     @Override

@@ -18,6 +18,14 @@ public class Owner {
         //default constructor for jackson
     }
 
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)
